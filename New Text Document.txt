@@ -1,0 +1,68 @@
+<!DOCKTYPE html>
+<html>
+<head>
+<title> my first web page </title>
+</head>
+
+<body>
+<h1> undrestanding </h1>
+
+ the first thing is understanding that what is  the <b>world wide web</B>
+
+<h2> listning </h2>
+  the second thing is how we acheave thi lesonse
+
+<h3> writing </h3>
+  the third thing is what the creation we done.
+
+to make a link. we should use this command.
+<a href="www.udacity.com">link</a>
+
+to get a picture. we should use this command.
+<img src="url of the pic" alt="text">
+
+to make headings like h1,h2,h3. you have to use this command.
+<h1> main heading </h1>
+<h2> second heading </h2>
+<h3> third heading </h3>
+
+to bold some text. you can use the command like this.
+<b> text </b>
+
+to emphasize some text you have to do like this
+<em> text </em>
+
+table canbe create like this.
+
+<table border="1">
+
+<tr>
+<th>Nihal</th>
+<th>Sunil</th>
+<th>Kamal</th>
+</tr>
+
+<tr>
+<td>maths,85</td>
+<td>maths,90</td>
+<td>maths,82</td>
+</tr>
+
+<tr>
+<td>art,78</td>
+<td>art,84</td>
+<td>art,70</td>
+</tr>
+
+<tr>
+<td>agriculture,67</td>
+<td>agriculture,65</td>
+<td>agriculture,71</td>
+</tr>
+</table>
+ 
+</body>
+
+</html>
+
+

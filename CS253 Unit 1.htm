@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Udacity - 21st Century University</title>
+<meta name="google-site-verification" content="8BozdrktZ5uY63LYrPxB5iOkouVTdHipGsNzUW9V2pU" />
+<link rel="stylesheet" type="text/css" href="/media/css/udacity2.css?104" />
+<link rel="stylesheet" type="text/css" href="/media/css/dialogs.css?104"/>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    button, .button, a.button, ol.nugget-list {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+<!--
+<script
+    src="//www.google.com/jsapi?key=ABQIAAAAOx-pTXyuaUsotjKevTem5RRY-J96ZG6vUeHysYWcYheHIRtZ7hQ7CQ5yRTKcwjX2z4sBOrajFOZMkA"></script>
+-->
+<script type="text/javascript">
+    if (!window.console) {
+       window.console = {
+          log : function(){},
+          debug : function(){},
+          info : function(){},
+          warn : function(){}
+       }
+    }
+    window.udacityJSVersion = 104;
+</script>
+<!-- 
+<script type="text/javascript">
+    google.load("jquery", "1.7.1", {uncompressed:true});
+    google.load("jqueryui", "1.8.16");
+</script>
+ -->
+<script src="/media/js/libs/jquery/jquery-1-7-2-min.js?104"></script>
+<script src="/media/js/libs/jquery/jquery-ui-1-8-16-min.js?104"></script>
+<script src="/media/js/jquery.form.js?104"></script>
+<script src="/media/js/jquery.history.js?104"></script>
+<script src="/media/js/json2.js?104"></script>
+<script src="/media/js/udacity.js?104"></script>
+<script src="/media/js/pages.js?104"></script>
+<script src="/media/js/social_apis.js?104"></script>
+
+
+<!-- Ember includes -->
+<script type="text/javascript">
+if ($.browser.msie && 1*$.browser.version < 9.0) {
+	document.write('<script src="/media/js/ember-0.9.6.min.js?104"><'+'/script>' );
+	console.log($.browser);
+	$.each($.browser,function(i,val){
+		console.log(i);
+		console.log(val);
+	});
+}
+else{
+    document.write('<script src="/media/js/ember-0.9.6.min.js?104"><'+'/script>');
+}
+</script>
+<script src="/media/js/models.js?104" type="text/javascript"></script>
+<script src="/media/js/ember/apps/notifications.js?104"></script>
+<script src="/media/js/bangvars.js?104" type="text/javascript"></script>
+
+<script type="text/javascript">
+  csrf_token = "mPba2Kn8g2ey2b5LPLW2gys7wfjJFnjtH5396jAEVenbrJZwpDAWCV8Fs4pA"
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28524234-1']);
+  _gaq.push(['_setCustomVar',1,'isUdacityRegistered','Yes', 1]);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+$(document).ready(function() {
+    // use js to position botbar at either end of document or bottom of window, whichever is lower
+    var windowHeight = $(window).height();   // returns height of browser viewport
+    var contentHeight = $("body").height(); // returns height of HTML document
+    var footerHeight = $("div#bottom_bin").height();
+    var footerTop = windowHeight - footerHeight - 50;
+    if (windowHeight > contentHeight) {
+        //$("div#bottom_bin").css("top",footerTop);
+    }
+
+
+    if(window.location.hash && window.location.hash.length > 0) {
+      UY.ajaxGET('account.is_enrolled_in_path',{path: window.location.hash.slice(1)},function(data){
+        _gaq.push(['_setCustomVar',2,'isEnrolledInCourse', (data.result) ? 'Yes' : 'No',3]);
+        _gaq.push(['_trackPageview',UY.getHashConvertedUrl()]);
+        isEnrolledInCourse = data.result;
+      });
+    } else {
+      _gaq.push(['_trackPageview',UY.getHashConvertedUrl()]);      
+    }
+});
+
+
+//Notifications
+$(document).ready(function(){
+    //Note.NotificationManager.getNotes(UY.BangVars.getHash(true));
+});
+
+</script>
+<script type="text/x-handlebars" data-template-name="notification-view">
+<div class="notification width960">
+    <div {{bindAttr class="importance"}}>
+        <div class="notification-icon">&nbsp;</div>
+        <div class="notification-content">{{{notification.content}}}</div>
+        <div class="dismissbox" {{action "dismissNotification" on="click" }}>x</div> 
+        <div class="clear"></div>
+    </div>
+</div>
+</script>
+
+</head>
+<body>
+    <div id="not-footer">
+        
+
+
+
+
+
+<div id="top_bin">
+	<div id="top_content" class="width960">
+		<!-- logo -->
+		<div class="udacity float-left">
+			<a href="/"><img id="top-logo" src="/media/img/logo-header-284x19.png" alt="Udacity" /></a><span id="top-course-title">&nbsp;</span>
+		</div>
+		<!-- buttons -->
+		<div class="user-block">
+		
+			 <!-- WELCOME BUTTON & ACCOUNT SETTINGS OVERLAY -->
+				<div id="user-topbar-button" class="topbar-modal-button float-right">
+					<span class="downward-link">Welcome, prasantha</span>
+				</div>
+				<div id="user-topbar-button-overlay" class="overlay">
+					<div class="topbar-menu">
+						<p class="text-center">
+						   <a href="/account/transcript">My Transcript</a>
+						</p>					
+						<p class="text-center">
+						   <a href="/account/profile">Profile Settings</a>
+						</p>					
+						<p class="text-center">
+						   <a href="/account/settings">Account Settings</a>
+						</p>
+					</div>
+					<div class="topbar-bottom-button">
+						<form id="signout-form" method="post">
+						   <button class="button forward-button" type="submit">
+								<span>Sign Out</span>
+						   </button>
+						</form>
+					</div>
+				</div>
+			<!-- SEPARATOR -->
+				<div class="top-bar-separator float-right"></div>
+			<!-- CLASS LIST BUTTON & OVERLAY -->
+				<div id="courses-topbar-button" class="topbar-modal-button float-right">
+				   <span class="downward-link">My Classes</span>
+				</div>
+				<div id="courses-topbar-button-overlay" class="overlay">
+					<div class="topbar-menu topbar-course-menu">
+						Loading courses...
+						<img src="/media/img/ajax-loader.gif" width=16 height=16 style="margin: 4px; vertical-align: middle;">
+					</div>
+					<div class="topbar-bottom-button">
+					   <a href="/courses" class="button">See All Classes</a>
+					</div>
+				</div>                
+
+
+		</div><!-- end user-block -->
+		<div class="header-title">
+			<h2></h2>
+		</div>
+		<div class="header-text clear">
+		
+		</div>
+
+		<!-- header nav function starts here -->
+		
+<div id="header-nav" style="display: none;">
+	<script type="text/x-handlebars">
+
+<ul class="topnav">
+	{{#if UY.HeaderNavApp.enabled}}
+  	    {{#unless UY.HeaderNavApp.headerLinks.enabled}}
+	        {{#each UY.HeaderNavApp.headerLinks.content}}
+		        <li class="topnav inactive">
+				    <span class="inactive">{{label}}</span>
+        	    </li>
+    	    {{/each}}
+	    {{else}}
+	        {{#each UY.HeaderNavApp.headerLinks.content}}
+			    {{#if current}}
+				    <li class="topnav selected">
+				    <a>{{label}}</a>
+			    {{else}}
+		            {{#if active}}
+   			             <li class="topnav">
+		                <a {{bindAttr href="link"}}>{{label}}</a>
+		            {{else}}                    
+		                <li class="topnav inactive">
+		                <span class="inactive">{{label}}</span>
+		            {{/if}}
+			    {{/if}}
+        	    </li>
+    	    {{/each}}
+	    {{/unless}}
+	{{/if}}
+</ul>
+<div class="clear"></div>
+</script>
+</div>
+
+		<!-- header nav function ends here -->
+
+	</div><!-- end top_content -->
+	<div class="clear"></div>
+
+<div id="javascript_warning">
+	<img src="/media/img/icons/alert.gif" style="vertical-align: middle;" />
+	<span>This website requires JavaScript to be enabled. Please make sure JavaScript is enabled in your web browser preferences and any JavaScript blockers are disabled for this site.</span>
+</div>
+<script type="text/javascript">
+	var el = document.getElementById('javascript_warning');
+	el.style.display = "none";
+</script>
+</div><!-- end top_bin -->
+
+        <div class="" id="notification-ember-anchor">
+	        <script type="text/x-handlebars">
+                {{#each Note.NotificationManager.content}}
+                    <div>
+                      {{view Note.NotificationView notificationBinding="this"}}
+                    </div>
+               {{/each}}
+           </script>
+           
+        </div>
+        <div id="content-background">
+            <div id="content" class="width960">            
+               
+<link rel="stylesheet" type="text/css" href="/media/wiki/style.css?104"/>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+ "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+ tex2jax: { inlineMath: [ ["$%","$%"] ],
+            displayMath: [ ["$$","$$"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno"
+ },
+ TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+ messageStyle: "none"
+});
+</script>
+<script>
+(function() {
+	var mj = document.createElement('script'); mj.type = 'text/javascript'; mj.async = true;
+	mj.id = 'mathjax-script-tag';
+	if (window.location.protocol.indexOf("https") == 0) {
+		mj.src = 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML';
+	} else {
+		mj.src = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML';
+	}
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mj, s);
+})();
+</script>
+<script>window.Handlebars || document.write('<script src="/media/js/ember-0.9.4.min.js"><\/script>')</script>
+<script>
+(function() {
+	var course = new RegExp('course=([^&]*)').exec(window.location.search);
+	course = course && unescape(course[1]) || ''; 
+	if (!course.match(/^\w+$/i)) {
+		UY.BangVars.getHash = function() { return ''; }
+		UY.ajaxGET = function() { }
+	} 
+	else {
+		$("#top-course-title").text(course);
+		// TODO Clean this up plz
+		var rev = 'apr2012';
+		if(course === 'ph100' || course === 'st101' || course === 'cs215' || course === 'cs221' || course === 'cs258') {
+			rev = '1';
+		}
+		UY.BangVars.getHash = function() { return 'Course/' + course + '/CourseRev/' + rev + '/Unit/1/Nugget/1'; }
+		$(function() {
+			$("#header-nav").show();
+			$('#wiki-content-container a').each(function(i, e) {
+				if (e.pathname.indexOf('/wiki') < 0 || e.search.indexOf('course=') >= 0) { return; }
+				if (e.search == '') { e.search = 'course=' + course; }
+				else { e.search += '&course=' + course; }
+			});
+		});	
+	}
+})();
+</script>
+<script src="/media/js/header_nav.js?104"></script>
+
+
+
+<div id="wiki-content-container">
+
+
+
+<link href="/media/wiki/google-code-prettify/prettify.css?104" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/media/wiki/google-code-prettify/prettify.js?104"></script>
+<script>
+$(document).ready(function() {
+    prettyPrint();
+})
+</script>
+<script type="text/javascript" src="/media/wiki/jquery.highlight.js?104"></script>
+<script>
+$(document).ready(function() {
+    var rx = /highlight=([^&]+)/;
+    var match = rx.exec(window.location.search);
+    if (match) {
+        $('#pb').highlight(decodeURIComponent(match[1]));
+    }
+})
+</script>
+
+<ul id="tabs" class="locked">
+  <li class="active"><a class="view" href="/wiki/CS253_Unit_1">View</a></li>
+    <li><a href="/wiki/w/edit?page=CS253_Unit_1">Edit</a></li>
+  <li><a href="/wiki/w/history?page=CS253_Unit_1">History</a></li>
+</ul>
+<div class="wtabs extl" id="pb">
+      <span class="pretty-format"><h1 id="cs253-unit-1-the-basics">CS253 - Unit 1: The Basics</h1>
+
+<span class="toc"><p>Contents</p><ul>
+  <li>1. <a href="#cs253-unit-1-the-basics">CS253 - Unit 1: The Basics</a>
+  <ul>
+    <li>1.1. <a href="#course-outline">Course Outline</a></li>
+    <li>1.2. <a href="#world-wide-web">World Wide Web</a>
+    <ul>
+      <li>1.2.1. <a href="#quiz-course-outline">Quiz: Course Outline</a></li>
+      <li>1.2.2. <a href="#quiz-file-types">Quiz: File Types</a></li>
+      <li>1.2.3. <a href="#quiz-components-of-the-web">Quiz: Components of the Web</a></li>
+      <li>1.2.4. <a href="#quiz-best-browser">Quiz: Best Browser</a></li>
+    </ul></li>
+    <li>1.3. <a href="#intro-to-html">Intro to HTML</a>
+    <ul>
+      <li>1.3.1. <a href="#the-bold-tag">The Bold Tag</a></li>
+      <li>1.3.2. <a href="#quiz-bold-tag">Quiz: Bold Tag</a></li>
+      <li>1.3.3. <a href="#more-tags">More Tags</a></li>
+      <li>1.3.4. <a href="#quiz-italics">Quiz: Italics</a></li>
+      <li>1.3.5. <a href="#quiz-missing-end-tag">Quiz: Missing End Tag</a></li>
+      <li>1.3.6. <a href="#making-links">Making Links</a></li>
+      <li>1.3.7. <a href="#quiz-making-links">Quiz: Making Links</a></li>
+    </ul></li>
+    <li>1.4. <a href="#adding-images">Adding Images</a>
+    <ul>
+      <li>1.4.1. <a href="#whitespace">Whitespace</a></li>
+      <li>1.4.2. <a href="#quiz-whitespace">Quiz: Whitespace</a></li>
+      <li>1.4.3. <a href="#quiz-paragraph-tag">Quiz: Paragraph Tag</a></li>
+    </ul></li>
+    <li>1.5. <a href="#inline-vs-block">Inline vs. Block</a>
+    <ul>
+      <li>1.5.1. <a href="#span-and-div">Span and Div</a></li>
+      <li>1.5.2. <a href="#quiz-span-and-div">Quiz: Span and Div</a></li>
+    </ul></li>
+    <li>1.6. <a href="#document-structure">Document Structure</a></li>
+    <li>1.7. <a href="#introducing-urls">Introducing URLs</a>
+    <ul>
+      <li>1.7.1. <a href="#quiz-correct-url">Quiz: Correct URL</a></li>
+      <li>1.7.2. <a href="#query-parameters">Query Parameters</a></li>
+      <li>1.7.3. <a href="#quiz-query-parameters">Quiz: Query Parameters</a></li>
+    </ul></li>
+    <li>1.8. <a href="#fragments">Fragments</a>
+    <ul>
+      <li>1.8.1. <a href="#port">Port</a></li>
+      <li>1.8.2. <a href="#quiz-port">Quiz: Port</a></li>
+      <li>1.8.3. <a href="#http">HTTP</a></li>
+      <li>1.8.4. <a href="#quiz-get">Quiz: GET</a></li>
+      <li>1.8.5. <a href="#quiz-most-common-method">Quiz: Most Common Method</a></li>
+    </ul></li>
+    <li>1.9. <a href="#making-requests">Making Requests</a></li>
+    <li>1.10. <a href="#user-agent-header">User Agent Header</a>
+    <ul>
+      <li>1.10.1. <a href="#quiz-valid-headers">Quiz: Valid Headers</a></li>
+    </ul></li>
+    <li>1.11. <a href="#http-response">http Response</a></li>
+    <li>1.12. <a href="#response-headers">Response Headers</a>
+    <ul>
+      <li>1.12.1. <a href="#quiz-telnet-request">Quiz: Telnet Request</a></li>
+    </ul></li>
+    <li>1.13. <a href="#web-applications">Web Applications</a>
+    <ul>
+      <li>1.13.1. <a href="#quiz-dynamic-content">Quiz: Dynamic Content</a></li>
+    </ul></li>
+  </ul></li>
+</ul></span>
+
+<h2 id="course-outline">Course Outline</h2>
+
+<p>In this class you will learn how to build web applications! Throughout this course you will be building a blog that will have user registration and allow you to submit user entries. This blog will be online for anyone to see and play with!</p>
+
+<p>In this unit you are going to cover the following basics of the web:</p>
+
+<ul>
+<li><strong>the web</strong>- what it is, what it looks like and how the pieces fit together</li>
+<li><strong>HTML</strong>- the main document type of the web</li>
+<li><strong>URLs</strong>-how you refer to documents on the web</li>
+<li><strong>HTTP</strong>- the protocol that the web runs on</li>
+<li><strong>Web Applications</strong>- what they are and how they fit into the big picture</li>
+</ul>
+
+<h2 id="world-wide-web">World Wide Web</h2>
+
+<p>The <strong>world wide web</strong> is a collection of HTML documents. <strong>HTML</strong> stands for <a href="/wiki/HyperText">HyperText</a> Markup Language and it is the basis for almost every webpage - it is what glues everything together.</p>
+
+<p>The links between pages are called <strong>hyper links</strong>, or just links, and give the internet its web-like characteristic.</p>
+
+<p>The web was invented in the early 1990's and has somewhere around 30 billion pages!</p>
+
+<h3 id="quiz-course-outline">Quiz: Course Outline</h3>
+
+<p>What is the main type of document on the web?</p>
+
+<ul>
+<li>a. HTML</li>
+<li>b. Microsoft Word</li>
+<li>c. PDF</li>
+<li>d. Plain Text</li>
+</ul>
+
+<h3 id="quiz-file-types">Quiz: File Types</h3>
+
+<p>What type of files can be found on the web?</p>
+
+<ul>
+<li>a. Plain text</li>
+<li>b. HTML</li>
+<li>c. Images</li>
+<li>d. Videos</li>
+<li>e. Music</li>
+</ul>
+
+<h3 id="quiz-components-of-the-web">Quiz: Components of the Web</h3>
+
+<p>2012-04-05-Image1.jpg</p>
+
+<p>Use the letters that are associated with each piece of technology and match them up with their name and definition.</p>
+
+<ol>
+<li><p><strong>HTTP</strong> - the main protocol of the web</p></li>
+<li><p><strong>Servers</strong> - computers that host the files that makes up the web</p></li>
+<li><p><strong>Internet</strong> - the world's largest computer network</p></li>
+<li><p><strong>Browser</strong> - a program that runs on your computer to display files found on the web</p></li>
+</ol>
+
+<h3 id="quiz-best-browser">Quiz: Best Browser</h3>
+
+<p>Which of these browsers is the best?</p>
+
+<ul>
+<li>a. Internet Explorer</li>
+<li>b. Firefox</li>
+<li>c. Chrome</li>
+<li>d. Safari</li>
+<li>e. Opera</li>
+</ul>
+
+<h2 id="intro-to-html">Intro to HTML</h2>
+
+<p>HTML, or <a href="/wiki/HyperText">HyperText</a> Markup Language is the heart of the web. It is made up of:</p>
+
+<ol>
+<li>text content, which is what you see</li>
+<li>markup, which is what the content looks like</li>
+<li>references to other documents, for example, images and videos</li>
+<li>links to other pages</li>
+</ol>
+
+<p>Explore HTML here, <a href="/html_playground">www.udacity.com/html_playground</a>/, and play around in this fake little test browser.</p>
+
+<p>A few things to note:</p>
+
+<p>Plain text is plain text in HTML, for the most part. 2012-04-05-Image2.jpg</p>
+
+<p>If you want to make the text look different you have to use markup.</p>
+
+<p>HTML markup is made up of things called "tags". Tags look something like this:</p>
+
+<ul>
+<li><NAME> Contents </NAME></li>
+</ul>
+
+<p>The contents can include other tags, or it may just be text. The <NAME> tag is called the "<strong>opening tag</strong>" and the </NAME> tag is called the "<strong>closing tag</strong>". Notice that the only difference between the opening and closing tags is that the closing tag has a slash, <strong>/</strong>, in front of the tag name.</p>
+
+<p>The whole construct: <NAME> Contents </NAME> can also be referred to as "<strong>an element</strong>".</p>
+
+<p>Let's learn about our first tag.</p>
+
+<h3 id="the-bold-tag">The Bold Tag</h3>
+
+<p>The first tag we are going to learn about is the bold tag. It looks like this:</p>
+
+<ul>
+<li><b>Contents</b></li>
+</ul>
+
+<p>It has an opening <b> tag and a closing </b> tag with the slash, and anything that appears between the opening and closing tags appears bold.</p>
+
+<p>b for bold.</p>
+
+<p>OK, quiz time:</p>
+
+<h3 id="quiz-bold-tag">Quiz: Bold Tag</h3>
+
+<p>In the box below, make the words reasonably straightforward bold:</p>
+
+<h3 id="more-tags">More Tags</h3>
+
+<p>Now we want to teach you another tag. This is the <em> tag. em stands for <strong>emphasis</strong>, and it makes things italic. The complete element will look like this:</p>
+
+<ul>
+<li><em>contents</em></li>
+</ul>
+
+<p>There is the opening <em> tag, the contents that we want to appear italic, and then the closing </em> tag with the slash. The structure is just like the bold tag we saw earlier.</p>
+
+<h3 id="quiz-italics">Quiz: Italics</h3>
+
+<p>What we want you to do is to make the phrase 'HTML is reasonably straightforward' italic.</p>
+
+<h3 id="quiz-missing-end-tag">Quiz: Missing End Tag</h3>
+
+<p>What would happen if we were to forget to close the <em> tag in our example?</p>
+
+<ul>
+<li>Nothing is italicised</li>
+<li>The browser crashes</li>
+<li>Everything after <em> is italicised</li>
+<li>Your guess is as good as mine</li>
+</ul>
+
+<h3 id="making-links">Making Links</h3>
+
+<p>Now we will teach you all a new concept. This is <strong>HTML attributes.</strong> Attributes appear something like this:</p>
+
+<ul>
+<li><TAG ATTR="value">Contents</TAG></li>
+</ul>
+
+<p>We still have our opening tag name and the closing tag as before, but now we have this new thing called an attribute.</p>
+
+<p>Attributes have a name (in the example above it is simply called <strong>ATTR</strong>) and a value (inside the quotes). Tags may have multiple attributes.</p>
+
+<p>An example of a tag that uses attributes is the <strong>anchor tag</strong> <a>, and a full example would look something like this:</p>
+
+<ul>
+<li><a rel="nofollow"  href="<a href="http://www.reddit.com">http://www.reddit.com</a>">derp</a></li>
+</ul>
+
+<p>Here, within the opening tag we have the opening a, an attribute called <strong>href</strong>, the value of the attribute which is a URL in this case. If this were rendered in a browser we would just see the word "derp", but it would be a link to reddit.com.</p>
+
+<h3 id="quiz-making-links">Quiz: Making Links</h3>
+
+<p>Make the words <strong>my favorite</strong> in the phrase below a link to udacity.com.</p>
+
+<h2 id="adding-images">Adding Images</h2>
+
+<p>The next tag we are going to introduce is the image tag. The image tag looks like this, <img>, and you won't be surprised to learn it is for including images. The image tag has the following structure:</p>
+
+<ul>
+<li><img src="URL" alt="text"></li>
+</ul>
+
+<p>The image tag has an attribute named <strong>src</strong> (for "source") which equals the URL which is the location of the image file to be downloaded. This is followed by a second attribute called <strong>alt</strong>. This stands for "alternate" and is the text that is to be displayed when the image doesn't load.</p>
+
+<p>The alt attribute is "required" in the sense that html parsers will complain at you if it is not there. Nothing will actually break if it is missing but it is really good practice to include it. If the image is moved or the requested URL is missing for some reason, this is the text that is displayed.</p>
+
+<p>The text associated with the alt attribute is also the text picked up by the reading software used by blind people to access the web. It doesn't take much effort to add an alt attribute to your images, but it can make somebody's day just that little bit easier...</p>
+
+<p>There is one more thing to be aware of about the image tag. Every tag we have looked at so far had a closing tag. Image tags don't. There is not contents to an image tag, and so the closing tag is not required.</p>
+
+<p>Tags, like <img>, that don't require a closing tag are called <strong>void tags</strong>.</p>
+
+<p>Images will appear inline with text.</p>
+
+<h3 id="whitespace">Whitespace</h3>
+
+<p>Let's talk about whitespace for a moment.</p>
+
+<p>You may have noticed that if you entered text into the editor on multiple lines, the browser window rendered it onto a single line. This is because in HTML, all whitespace, new lines, tabs, spaces are all converted into a single space.</p>
+
+<p>To force the browser to display text on multiple lines we can use another tag called the break tag, and it looks like this:</p>
+
+<ul>
+<li><br></li>
+</ul>
+
+<p><br> is also a void tag.</p>
+
+<p>The effect of <br> is to cause the browser to move to a new line before displaying the next piece of content. Multiple <br> tags will cause the browser to move down multiple lines before it displays further content.</p>
+
+<p>Another way of creating line-breaks is to use the paragraph tag <p>. The paragraph tag is <strong>NOT</strong> a void tag. Paragraph tags have content and appear like this:</p>
+
+<ul>
+<li><p>Content</p></li>
+</ul>
+
+<p>The content between the opening and closing tags will be rendered by the browser as a single paragraph.</p>
+
+<h3 id="quiz-whitespace">Quiz: Whitespace</h3>
+
+<p>Enter the HTML to draw the following text:</p>
+
+<ul>
+<li>Hello everyone!</li>
+<li>We're using two lines now!</li>
+</ul>
+
+<p>on two lines, using the <br> tag.</p>
+
+<h3 id="quiz-paragraph-tag">Quiz: Paragraph Tag</h3>
+
+<p>OK, now let's do the same thing, only this time using the paragraph tag. Enter the HTML to draw the following text:</p>
+
+<ul>
+<li>Hello everyone!</li>
+<li>We're using two lines now!</li>
+</ul>
+
+<p>on two lines, using the <p> tag.</p>
+
+<h2 id="inline-vs-block">Inline vs. Block</h2>
+
+<p>One last thing I'd like to talk about regarding <br> and <p>, is the question of why we have two different ways of creating line-breaks? Why do we have the <br> tag and also the <p> tag?</p>
+
+<p>The answer is that the <br> tag is what we call an <strong>INLINE</strong> tag and the <p> tag is what we call a <strong>BLOCK</strong> tag.</p>
+
+<p>What the <br> tag was actually doing is telling the browser to end the line.</p>
+
+<p>The <p> tag acts differently. What the <p> tag does is to create an invisible "box". So the HTML code:</p>
+
+<ul>
+<li><p>text1</p>text2</li>
+</ul>
+
+<p>Creates an invisible "box" around text1. This box can have height and width. Text2 will be outside this "box".</p>
+
+<p>The differences between inline and block tags will come up a fair amount in this course, and it is important to know that there is a distinction between them and they have different behaviours. So far, all of the elements that we have learned (other then <p>) are inline elements.</p>
+
+<h3 id="span-and-div">Span and Div</h3>
+
+<p>Two more elements that I'd like to teach you are called <strong>Span</strong> and <strong>Div</strong>. Both span and div are normal elements, that is they can both have content:</p>
+
+<ul>
+<li><span>Content</span></li>
+<li><div>Content</div></li>
+</ul>
+
+<p>The only difference between these elements is that span is an inline element whereas div is a block element. The only function of these elements is to contain their content and there is a way of attaching styles to them to change the way in which their contents display. This is done by attaching attributes to the tags so they look something like this:</p>
+
+<ul>
+<li><span class="foo">Content</span></li>
+<li><div class="bar">Content</div></li>
+</ul>
+
+<p>The class attribute refers to a <strong>CSS class</strong>. CSS classes are not something that we are going to spend a lot of time on in this course, as we will provide the CSS where needed. CSS is a separate language for adding styles to your documents.</p>
+
+<p>We will be using <span> and <div> elements a lot to control the layout of text, and the important thing to remember is that <span> is an inline tag, and <div> is a block tag.</p>
+
+<h3 id="quiz-span-and-div">Quiz: Span and Div</h3>
+
+<p>Select all of the elements that are inline. Some of these are elements that you haven't seen before, so I would like you to trty them out in your browser and see if you can figure it out for yourself:</p>
+
+<table>
+<tbody>
+<tr><td>a</td><td>p</td></tr>
+<tr><td>div</td><td>img</td></tr>
+<tr><td>span</td><td>strong</td></tr>
+<tr><td>br</td><td>form</td></tr>
+</tbody>
+</table>
+
+<h2 id="document-structure">Document Structure</h2>
+
+<p>That is enough HTML elements for now. I want to quickly talk about the structure of an actual HTML document before we move on.</p>
+
+<p>What we have seen up until now has just been some very simple markup. We've been seeing this like this:</p>
+
+<ul>
+<li><b>Content</b></li>
+</ul>
+
+<p>with just a little text and a few simple tags, but an actual HTML document has quite a bit more to it. Here we see a whole lot more HTML:</p>
+
+<p><!DOCTYPE HTML></p>
+
+<p><html></p>
+
+<p><head></p>
+
+<ul>
+<li><title>Title!</title></li>
+</ul>
+
+<p></head></p>
+
+<p><body></p>
+
+<ul>
+<li><b>Content</b></li>
+</ul>
+
+<p></body></p>
+
+<p></html></p>
+
+<p>This is what a complete HTML document looks like. Let's look at this piece by piece. The first line:</p>
+
+<p><!DOCTYPE HTML></p>
+
+<p>specifies the doctype. i.e. what kind of HTML this is. The "HTML" string within this tag used to be a <em>LOT</em> more complicated, but now that we are using HTML5 we have a nice clean, simple doctype.</p>
+
+<p>The <strong><html></strong> and <strong></html></strong> tags surround the rest of the document providing a kind of "container" for the document.</p>
+
+<p>The <strong><head></strong> and <strong></head></strong> tags enclose the document header. This part of the document contains metadata about the document and other document information. <a href="/wiki/JavaScript">JavaScript</a> and CSS would also be included in the document header.</p>
+
+<p>The <strong><title></strong> element contains the title of the page. This is what will appear at the top of your browser, and in the browser tab, when you open the document.</p>
+
+<p>Next, we have the <strong><body></strong> and <strong></body></strong> tags that enclose the actual contents of the document. So far, we have been looking at elements that would be included in the body of the document. In fact, most of this course will be concerned with generating the content that fits between the body tags. The rest of the HTML that makes up the document is important, and you will see it, and we'll be sending it over the wire, but it doesn't change very often and it is pretty simple. All of the interesting stuff happens between the body tags.</p>
+
+<h2 id="introducing-urls">Introducing URLs</h2>
+
+<p>Let's talk about URLs.</p>
+
+<p>URL stands for <strong><em>Uniform Resource Locator</em></strong>. An example of a URL would look like this:</p>
+
+<p><a href="/">http://www.udacity.com/</a>/</p>
+
+<p>This has three parts:</p>
+
+<ol>
+<li>The protocol: http</li>
+<li>The host: www.udacity.com</li>
+<li>The path /</li>
+</ol>
+
+<p>The protocol can be a number of things. For our purposes this will be http almost all of the time (it can also be https, ftp and some other protocols). It is separated from the host by a colon and two slashes - <strong>://</strong></p>
+
+<p>The host is the host name or domain name of the server that has the document that we want to access.</p>
+
+<p>The path is the document we want to access. The shortest possible path is just the single slash.</p>
+
+<h3 id="quiz-correct-url">Quiz: Correct URL</h3>
+
+<p>Given the protocol <strong>ftp</strong>, the host <strong>www.udacity.com</strong>, and the path <strong>/about</strong>, what is the URL?</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<p>OK, let's add something new to our URLs, called <strong>Query Parameters</strong> (also known as <strong>GET Parameters</strong>). Here is an example of a query parameter:</p>
+
+<ul>
+<li><a rel="nofollow"  href="http://www.example.com/foo'''?p=1">http://www.example.com/foo?p=1</a></li>
+</ul>
+
+<p>This has a simple URL of the type we have already seen, with the path <strong>/foo</strong>, to which we have added <strong>?p=1</strong>. This adds an extra parameter with the name p and the value 1. URLs can have multiple query parameters:</p>
+
+<ul>
+<li><strong><a rel="nofollow"  href="http://www.example.com/foo'''?p=1&amp;q=neat">http://www.example.com/foo?p=1&amp;q=neat</a></strong></li>
+</ul>
+
+<p>The URL now has two query parameters. The fist query parameter is separated from the URL by a question mark, and the query parameters are separated from each other by ampersands.</p>
+
+<p>So what are query parameters actually for? Query parameters pass information to the server when you request the particular path. This information can be used for all sorts of things and we will discuss some of these later in the class.</p>
+
+<h3 id="quiz-query-parameters">Quiz: Query Parameters</h3>
+
+<p>In the following URL, what is the value of the <strong>z</strong> parameter?</p>
+
+<p><a rel="nofollow"  href="http://example.com/foo?p=foo&amp;z=p">http://example.com/foo?p=foo&amp;z=p</a></p>
+
+<h2 id="fragments">Fragments</h2>
+
+<p>Let's add one more piece to our URLs. This is a <strong>fragment</strong>. A fragment is separated from the rest of the URL by a hash sign:</p>
+
+<ul>
+<li><a rel="nofollow"  href="http://www.example.com'''#fragment">http://www.example.com#fragment</a></li>
+</ul>
+
+<p>A fragment is usually used to reference a part of the page that you are looking at, although there are some fancier uses if you are going to do some complex <strong><a href="/wiki/JavaScript">JavaScript</a></strong> things<strong>.</strong></p>
+
+<p>The fragment is not sent to the server when you make a request. The fragment just exists in the browser.</p>
+
+<p>URLs can have both fragments and query parameters, in which case the fragment follows the query parameter(s):</p>
+
+<ul>
+<li><strong><a rel="nofollow"  href="http://www.example.com/foo'''?'''p=1'''#fragment">http://www.example.com/foo?p=1#fragment</a></strong></li>
+</ul>
+
+<h3 id="port">Port</h3>
+
+<p>The last part of the URL that we are going to look at for now is the <strong>port</strong>:</p>
+
+<ul>
+<li><a rel="nofollow"  href="http://localhost''':8000'''/">http://localhost:8000/</a></li>
+</ul>
+
+<p>When you make a web-request to the server, in order to make an internet connection you need two things:</p>
+
+<ol>
+<li>the address of the machine (localhost in the example above)</li>
+<li>a port (8000 in the above example)</li>
+</ol>
+
+<p>By default, the port equals <strong>80</strong>. If you want to use a port other than 80, you can include it in the URL between the host and the path, separated from the host by a colon.</p>
+
+<p>The URL shown in the example above will become very familiar to you. This will be your local development URL for a lot of this course, and also for much of your career as a web developer. You will be constantly accessing your local machine, and you will probably be doing on something other than port 80.</p>
+
+<p>There are even more parts to a URL, but these aren't relevant to us right now, so we will deal with them as we go.</p>
+
+<h3 id="quiz-port">Quiz: Port</h3>
+
+<p>Identify the different parts of this URL:</p>
+
+<p><a rel="nofollow"  href="http://example.com:80/toys?p=foo#blah">http://example.com:80/toys?p=foo#blah</a></p>
+
+<table>
+<tbody>
+<tr><td>host</td><td></td></tr>
+<tr><td>protocol</td><td></td></tr>
+<tr><td>fragment</td><td></td></tr>
+<tr><td>query</td><td></td></tr>
+<tr><td>port</td><td></td></tr>
+</tbody>
+</table>
+
+<h3 id="http">HTTP</h3>
+
+<p>HTTP is the main protocol of the web. It is what your browser uses to communicate with web servers. HTTP stands for <a href="/wiki/HyperText">HyperText</a> Transfer Protocol.</p>
+
+<p>A request from your browser for the URL:</p>
+
+<p><a rel="nofollow"  href="http://www.example.com/foo">http://www.example.com/foo</a></p>
+
+<p>begins with a request line that looks something like this:</p>
+
+<ul>
+<li>GET /foo HTTP/1.1</li>
+</ul>
+
+<p>HTTP is a very simple text protocol, so this text is sent over the Internet exactly as shown. The request line has three main parts:</p>
+
+<ol>
+<li>Method - the type of request we are making to the server (GET)</li>
+<li>Path - from the URL (/foo)</li>
+<li>Version - HTTP/version (HTTP/1.1)</li>
+</ol>
+
+<p>The two main methods we will be considering are GET and POST.</p>
+
+<p>The host name doesn't appear in the request line. That is because we are already connected to the host. The host is used to make the connection, the path is used to make the request.</p>
+
+<h3 id="quiz-get">Quiz: GET</h3>
+
+<p>Given the following URL:</p>
+
+<p><a rel="nofollow"  href="http://example.com/foo/logo.png?p=1#tricky">http://example.com/foo/logo.png?p=1#tricky</a></p>
+
+<p>what is the request line to GET this URL using HTTP/1.1?</p>
+
+<h3 id="quiz-most-common-method">Quiz: Most Common Method</h3>
+
+<p>Which method is most often used for requesting a document from the server?</p>
+
+<h2 id="making-requests">Making Requests</h2>
+
+<p>We had our request line that looked something like this</p>
+
+<p>GET /foo HTTP/1.1</p>
+
+<p>This is followed by a number of headers. Headers have this format:</p>
+
+<p>Name: value</p>
+
+<p>When you make a request, the request line and all of the associated headers are sent at once. Some of the more popular headers are:</p>
+
+<p>Host: www.example.com</p>
+
+<p>User-Agent: chrome</p>
+
+<p>The Host header is required in HTTP/1.1 but isn't strictly required in HTTP/1.0. We have already used the host from the URL to connect to the server, so why would we need to include it in a header? Well, web-servers may have multiple names, and one machine may host many individual websites.</p>
+
+<p>The User-Agent header describes who is making the request. It will generally be your web-browser, which helps the server to know what type of machine is making the request.</p>
+
+<h2 id="user-agent-header">User Agent Header</h2>
+
+<p>Steve talks about his experience when getting Reddit up-and-running. User-Agents are one of the most important headers in an HTTP request.</p>
+
+<p>User-Agents were really important to Reddit. Reddit was a site that was online and really popular. Users would often write scripts and so on to pull content down from Reddit, and mostly they were doing good things. Sometimes, however users would do bad things, for example spammers looking for weaknesses or trying to gain access to the system.</p>
+
+<p>User-Agents were important. Sometimes users would hit the site a little too hard, or too fast, hurting the website for real users. If they had a legitimate User-Agent, the team at Reddit could look at them and take steps to moderate the behaviour . The Google-bot (Google's web crawler) was a really good example of this. However, when people turned up with fake user agents pretending to be a browser and hurting the site, then the team at Reddit would simply block them.</p>
+
+<p>Using good User-Agents when you write software that interacts with other people's websites it a really nice, courteous thing to do, and is one of the things that makes the web work well for everybody. So it is important to have a nice, accurate User-Agent and to be honest whenever you can.</p>
+
+<h3 id="quiz-valid-headers">Quiz: Valid Headers</h3>
+
+<p>Which of these are valid headers?</p>
+
+<ul>
+<li>User Agent: chrome</li>
+<li>Host: www.hipmunk.com</li>
+<li>host www.example.com</li>
+<li>User-Agent: ignore me I'm a spammer</li>
+<li>i-made-this-up: whatever</li>
+</ul>
+
+<h2 id="http-response">http Response</h2>
+
+<p>OK, now that we have seen the HTTP requests, let's take a look at HTTP responses.</p>
+
+<p>The basic HTTP response looks similar to the HTTP request. For example, if we send the request:</p>
+
+<p>GET /foo HTTP/1.1</p>
+
+<p>The response may look something like:</p>
+
+<p>HTTP/1.1 200 OK</p>
+
+<p>This is called the status line and is analogous to the request line we saw earlier. The version in the status line should match the version in the request (HTTP/1.1). The version is followed by two additional pieces of information:</p>
+
+<p>The status code</p>
+
+<p>The reason phrase (an English-language description of the status code)</p>
+
+<p>There are some really common status codes:</p>
+
+<table>
+<tbody>
+<tr><td>200</td><td>OK</td></tr>
+<tr><td>302</td><td>Found</td></tr>
+<tr><td>404</td><td>Not found</td></tr>
+<tr><td>500</td><td>Server error</td></tr>
+</tbody>
+</table>
+
+<p>If the code starts with a 2 (e.g. 200), this means everything worked alright. If it starts with 3, it means there's a bit more work to be done. If it starts with 4 (e.g. 404), it indicates that there was an error on the browser side, and if it starts with 5, it means that there was a error on the server side.</p>
+
+<h2 id="response-headers">Response Headers</h2>
+
+<p>Just like the request line we saw earlier, the status line is followed by a number of headers. Here are a few examples that are commonly included with HTTP responses:</p>
+
+<ul>
+<li>HTTP/1.1 200 OK</li>
+<li><strong>Date: Tue Mar 2012 04:33:33 GMT</strong></li>
+<li><strong>Sever: Apache / 2.2.3</strong></li>
+<li><strong>Content-Type: text/html</strong></li>
+<li><strong>Content-Length: 1539</strong></li>
+</ul>
+
+<p>The Date header should be there every time. It is the date that the request was made.</p>
+
+<p>The Server header is similar to the User-Agent header in request line. Typically it contains the name and version number of the server. However, this could be useful information to would-be hackers, so it may be missing or contain made-up information.</p>
+
+<p>Content-Type is simply the type of document that is being returned.</p>
+
+<p>Content-Length is the length of the document. It is often included, but isn't strictly required since the browser will know when the data is complete as the connection will close.</p>
+
+<p>There follows a demonstration of using Telnet to send a request line and headers, and view the response.</p>
+
+<h3 id="quiz-telnet-request">Quiz: Telnet Request</h3>
+
+<p>Use telnet to make a request to:</p>
+
+<ul>
+<li><a rel="nofollow"  href="http://www.example.com">http://www.example.com</a></li>
+</ul>
+
+<p>The request is to be a GET request for the path /</p>
+
+<p>What is the status code?</p>
+
+<p>What is the value of the location header?</p>
+
+<h2 id="web-applications">Web Applications</h2>
+
+<p>Most of this course is going to focus on how to run programs on servers. The purpose of a web-server is to respond to HTTP requests. There are two main classifications for server responses:</p>
+
+<ol>
+<li>Static</li>
+<li>Dynamic</li>
+</ol>
+
+<p>Content is considered static if it is a pre-written file that the server simply returns. Examples of static content include image files.</p>
+
+<p>More interesting are dynamic requests, which are requests where the responses are built on-the-fly by a program running on the server. Just about all the content online these days is dynamic. The programs that build these dynamic responses are called web applications.</p>
+
+<p>A web application is just a program that generates content. It is run from the server, speaks http, and generates dynamic content requested by the browser and is what we are going to learn to build on this course.</p>
+
+<h3 id="quiz-dynamic-content">Quiz: Dynamic Content</h3>
+
+<p>Which of these requests is for dynamic content?</p>
+
+<ul>
+<li>Your Facebook page</li>
+<li>The Udacity.com logo</li>
+<li>A blog's front page</li>
+<li>Google search results</li>
+</ul>
+</span>
+</div>
+
+
+
+<div id="wiki-footer">
+    <p id="pm">This 
+        page was last edited
+    by (none)
+    on 2012/07/20 13:39:26.</p>
+</div>
+
+
+</div>
+
+            </div>
+        </div>
+        <div id="footer-pusher"></div>
+    </div>
+    <div id="footer">
+        
+
+<!-- <div class="clear"></div> -->
+<div id="bottom_bin">
+    <div class="width960">
+        <div class="left">
+            <p>Follow us on 
+                <a href="http://www.facebook.com/pages/Udacity/174179219354091?sk=wall" target="_blank">Facebook</a>, 
+                <a href="http://twitter.com/udacity" target="_blank">Twitter</a>, and 
+                <a href="https://plus.google.com/116286004036789369492/posts" target="_blank">Google Plus</a>
+            </p>
+            <p>&copy 2012 Udacity, Inc.</p>    
+        </div>
+        <div class="right">
+			<p>
+			    <a href="/">Home</a>
+			    <a href="/udacity">About</a>
+			    <a href="/careers/">Jobs</a>
+			    <a href="/contact">Contact</a>
+			    <a href="/wiki/FAQ">FAQ</a>
+			    <a href="/legal/">Legal</a>
+			</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div><!-- end bottom_bin -->
+<!-- <div class="clear">&nbsp;</div> -->
+
+
+
+
+    </div>
+    
+
+    
+</body>
+</html>
+
+
+
+
+

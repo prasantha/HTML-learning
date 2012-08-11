@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+</head>
+
+<body>
+The content of the document......
+</body>
+
+</html> 
+
+
+
+
+
+<h1>This is a heading</h1>
+<h2>This is a heading</h2>
+<h3>This is a heading</h3> 
+
+
+
+<a href="http://www.w3schools.com">This is a link</a>
+
+
+<abbr> 	Defines an abbreviation
+<acronym> 	Defines an acronym
+<address> 	Defines contact information for the author/owner of a document
+<bdo> 	Defines the text direction
+<blockquote> 	Defines a long quotation
+<q> 	Defines a short quotation
+<cite> 	Defines a citation
+<dfn> 	Defines a definition term
+
+
+<code> 	Defines computer code text
+<kbd> 	Defines keyboard text 
+<samp> 	Defines sample computer code
+<tt> 	Defines teletype text
+<var> 	Defines a variable
+<pre> 	Defines preformatted text
+
+
+<b> 	Defines bold text
+<big> 	Defines big text
+<em> 	Defines emphasized text 
+<i> 	Defines italic text
+<small> 	Defines small text
+<strong> 	Defines strong text
+<sub> 	Defines subscripted text
+<sup> 	Defines superscripted text
+<ins> 	Defines inserted text
+<del> 	Defines deleted text
+
+
+<img src="url" alt="some_text"/> 
+
+
+
+
+<table border="1">
+<tr>
+<td>row 1, cell 1</td>
+<td>row 1, cell 2</td>
+</tr>
+<tr>
+<td>row 2, cell 1</td>
+<td>row 2, cell 2</td>
+</tr>
+</table>
+
+How the HTML code above looks in a browser:
+row 1, cell 1 	row 1, cell 2
+row 2, cell 1 	row 2, cell 2
+
+
+
+
+<table border="1">
+<tr>
+<th>Header 1</th>
+<th>Header 2</th>
+</tr>
+<tr>
+<td>row 1, cell 1</td>
+<td>row 1, cell 2</td>
+</tr>
+<tr>
+<td>row 2, cell 1</td>
+<td>row 2, cell 2</td>
+</tr>
+</table>
+
+How the HTML code above looks in your browser:
+Header 1 	Header 2
+row 1, cell 1 	row 1, cell 2
+row 2, cell 1 	row 2, cell 2
+
+
+
+
+<table> 	Defines a table
+<th> 	Defines a table header
+<tr> 	Defines a table row
+<td> 	Defines a table cell
+<caption> 	Defines a table caption
+<colgroup> 	Defines a group of columns in a table, for formatting
+<col /> 	Defines attribute values for one or more columns in a table
+<thead> 	Groups the header content in a table
+<tbody> 	Groups the body content in a table
+<tfoot> 	Groups the footer content in a table 
+
+
+
+
